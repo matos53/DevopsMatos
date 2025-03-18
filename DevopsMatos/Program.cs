@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using DevopsMatos.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<DevopsMatosContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DevopsMatosContext") ?? throw new InvalidOperationException("Connection string 'DevopsMatosContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
